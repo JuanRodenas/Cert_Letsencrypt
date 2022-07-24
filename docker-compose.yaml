@@ -1,0 +1,23 @@
+---
+version: "2.1"
+services:
+  letsencrypt:
+    image: linuxserver/letsencrypt:latest
+    container_name: letsencrypt
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VALIDATION=duckdns
+      - URL=YOUR_DOMAIN.duckdns.org
+      - DUCKDNSTOKEN=YOUR_TOKEN_DOMAIN
+      - EMAIL="YOUR_MAIL"
+      - TZ=Europe/Madrid
+    volumes:
+      - /root/docker/letsencrypt/:/config 
+    ports:
+      - 20000:443
+      - 20001:80
+    cap_add:
+      - NET_ADMIN
