@@ -1,6 +1,15 @@
-# Cert_Letsencrypt
+## Certificados para dominios de Duckdns con _Let's encrypt_
+<p align="center">
+  <img src="https://github.com/JuanRodenas/Cert_Letsencrypt/blob/main/duckdns-letsencrypt.png"
+       width="700"/>
+</p>
 
-#### Crear una cuenta en:
+<p align="center">
+  <img src="https://logos-world.net/wp-content/uploads/2021/02/Docker-Symbol.png" 
+       width="300"/>
+</p>
+
+### Crear una cuenta en:
 [DuckDNS](https://www.duckdns.org)
 - Copie el token de su dominio y el dominio creado.
 
@@ -9,11 +18,11 @@
 ![alt text](https://github.com/JuanRodenas/Cert_Letsencrypt/blob/main/Dominio-duckdns.png)
 
 
-#### Descargar el repositorio
+### Descargar el repositorio
 ```
 git clone https://github.com/JuanRodenas/Cert_Letsencrypt.git
 ```
-#### Arquitecturas soportadas
+### Arquitecturas soportadas
 Soporta múltiples arquitecturas como `x86-64`, `arm64` and `armhf`. Las arquitecturas soportadas por esta imagen son:
 
 | Architecture | Tag |
@@ -22,7 +31,7 @@ Soporta múltiples arquitecturas como `x86-64`, `arm64` and `armhf`. Las arquite
 | arm64 | arm64v8-latest |
 | armhf | arm32v7-latest |
 
-#### Parameters
+### Parameters
 | Parameter | Function |
 | :----: | --- |
 | `-p 443` | Https port |
@@ -43,18 +52,18 @@ Soporta múltiples arquitecturas como `x86-64`, `arm64` and `armhf`. Las arquite
 | `-e STAGING=false` | Set to `true` to retrieve certs in staging mode. Rate limits will be much higher, but the resulting cert will not pass the browser's security test. Only to be used for testing purposes. |
 | `-v /config` | All the config files including the webroot reside here. |
 
-#### editamos los parámetros de nuestro dominio y correo electrónico.
+### editamos los parámetros de nuestro dominio y correo electrónico.
 ```
 - URL=YOUR_DOMAIN.duckdns.org
 - DUCKDNSTOKEN=YOUR_TOKEN
 - EMAIL="YOUR_MAIL"
 ```
 
-#### Desplegamos el contenedor docker
+### Desplegamos el contenedor docker
 ```
 docker-compose up -d
 ```
-#### Comprobamos los archivos creados en el directorio
+### Comprobamos los archivos creados en el directorio
 ```
 $ ls -l /root/docker/letsencrypt/config/etc/letsencrypt/archive/YOUR_DOMAIN.duckdns.org/
 total 20
@@ -65,7 +74,7 @@ total 20
 ```
 Tendremos el certificado con su clave privada y el certificado intermedio, elegiremos archivo, donde X es el número de archivo más alto que tengamos, los anteriores no se borran.
 
-# Sacar el .crt y .key de un .pfx
+## Sacar el .crt y .key de un .pfx
 
 Si tenemos un certificado en formato .pfx, y lo que necesitamos es el .crt y la clave privada en .key, tenemos que separar dichos ficheros del .pfx
 Para ello, solo necesitamos OpenSSL, y la clave PEM con la que se genero el .pfx\
